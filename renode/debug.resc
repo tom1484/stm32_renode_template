@@ -1,0 +1,21 @@
+$name?="<MACH_NAME>"
+$bin?=$ORIGIN/../build/Debug/<BINARY_NAME>.elf
+
+mach create $name
+machine LoadPlatformDescription $ORIGIN/basic.repl
+
+macro reset
+"""
+    pause
+    sysbus LoadELF $bin
+"""
+
+macro clear
+"""
+    machine StopGdbServer
+    pause
+    mach rem $name
+"""
+
+runMacro $reset
+machine StartGdbServer 3333
