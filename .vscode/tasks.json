@@ -8,7 +8,8 @@
             "args": [
                 "renode/run_local.sh",
                 "${workspaceFolder}",
-                "${workspaceFolderBasename}"
+                "${workspaceFolderBasename}",
+                "<MACH_NAME>"
             ],
             "dependsOn": [
                 "CMake: build"
@@ -38,7 +39,8 @@
             "args": [
                 "renode/sync_remote.sh",
                 "${workspaceFolder}",
-                "${workspaceFolderBasename}"
+                "${workspaceFolderBasename}",
+                "<REMOTE_HOST>"
             ],
             "problemMatcher": []
         },
@@ -49,7 +51,10 @@
             "args": [
                 "renode/run_remote.sh",
                 "${workspaceFolder}",
-                "${workspaceFolderBasename}"
+                "${workspaceFolderBasename}",
+                "<MACH_NAME>",
+                "<GDB_PORT>",
+                "<REMOTE_HOST>"
             ],
             "dependsOn": [
                 "CMake: build",
@@ -78,14 +83,6 @@
             "command": "echo ${input:terminate}",
             "type": "shell",
             "problemMatcher": []
-        }
-    ],
-    "inputs": [
-        {
-            "id": "terminate",
-            "type": "command",
-            "command": "workbench.action.tasks.terminate",
-            "args": "terminateAll"
         }
     ]
 }

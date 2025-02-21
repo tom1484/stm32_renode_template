@@ -32,21 +32,13 @@
             "cwd": "${workspaceRoot}",
             "executable": "${command:cmake.launchTargetPath}",
             "gdbPath": "${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin/arm-none-eabi-gdb",
-            "gdbTarget": "${input:gdbTarget}",
-            "device": "STM32F429ZITx",
+            "gdbTarget": "<GDB_TARGET>",
+            "device": "<BOARD_NAME>",
             "runToEntryPoint": "main",
-            "svdFile": "${config:STM32VSCodeExtension.cubeCLT.path}/STMicroelectronics_CMSIS_SVD/STM32F429.svd",
+            "svdFile": "${config:STM32VSCodeExtension.cubeCLT.path}/STMicroelectronics_CMSIS_SVD/<CPU_SVD>.svd",
             "overrideResetCommands": [
                 "monitor machine Reset"
             ]
-        }
-    ],
-    "inputs": [
-        {
-            "id": "gdbTarget",
-            "type": "promptString",
-            "description": "GDB Target",
-            "default": "churong.cc:3333"
         }
     ]
 }

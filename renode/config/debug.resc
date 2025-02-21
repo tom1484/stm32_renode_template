@@ -1,5 +1,7 @@
-$name?="<MACH_NAME>"
-$bin?=$ORIGIN/../build/Debug/<BINARY_NAME>.elf
+# Required variables
+# name: machine name
+# bin: path to the binary
+# port: port to start GDB server on
 
 mach create $name
 machine LoadPlatformDescription $ORIGIN/basic.repl
@@ -18,4 +20,6 @@ macro clear
 """
 
 runMacro $reset
-machine StartGdbServer 3333
+
+$port?=3333
+machine StartGdbServer $port
