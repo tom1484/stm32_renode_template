@@ -2,14 +2,58 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run Renode",
+            "label": "Run Renode Local",
             "type": "shell",
-            "command": "renode",
+            "command": "bash",
             "args": [
-                "${workspaceFolder}/renode/debug.resc"
+                "renode/run_local.sh",
+                "${workspaceFolder}",
+                "${workspaceFolderBasename}"
             ],
             "dependsOn": [
                 "CMake: build"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "source": "Renode",
+                "pattern": {
+                    "regexp": ""
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Renode, version .*",
+                    "endsPattern": ".*GDB server with all CPUs started on port.*"
+                }
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Sync Renode Remote",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "renode/sync_remote.sh",
+                "${workspaceFolder}",
+                "${workspaceFolderBasename}"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Renode Remote",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "renode/run_remote.sh",
+                "${workspaceFolder}",
+                "${workspaceFolderBasename}"
+            ],
+            "dependsOn": [
+                "CMake: build",
+                "Sync Renode Remote"
             ],
             "isBackground": true,
             "problemMatcher": {
@@ -34,7 +78,7 @@
             "command": "echo ${input:terminate}",
             "type": "shell",
             "problemMatcher": []
-        },
+        }
     ],
     "inputs": [
         {
